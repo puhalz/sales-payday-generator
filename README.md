@@ -6,4 +6,4 @@
 
 Note: Enter 4 digits of a year.
 
-A csv file will be generated in the var/SalesPaydayCsv/ folder 
+A csv file will be generated in the var/ folder 

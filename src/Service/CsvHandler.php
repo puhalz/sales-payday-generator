@@ -8,7 +8,7 @@ use Psr\Log\LoggerInterface;
 
 class CsvHandler implements PayDayFileWriterInterface
 {
-    const OUTPUT_DIR = '../../var/SalesPaydayCsv';
+    const OUTPUT_DIR = '../../var/';
 
     public function __construct(LoggerInterface $logger)
     {
