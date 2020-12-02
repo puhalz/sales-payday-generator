@@ -31,7 +31,7 @@ class CsvHandler implements PayDayFileWriterInterface
                 ['exception' => $exception]
             );
 
-            throw new \RuntimeException('Unable to write to a csv file.'. $exception->getMessage());
+            throw new \RuntimeException('Unable to write to a csv file.' . $exception->getMessage());
         }
 
     }

@@ -4,7 +4,6 @@ namespace App\Command;
 
 use App\Exception\InvalidInputException;
 use App\Service\PayDayGenerator;
-use App\Util\DateUtilInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -35,20 +34,22 @@ class SalesPaydayCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        if (4 !== strlen($input->getArgument('year'))) {
+        if (!is_numeric($input->getArgument('year')) || 4 !== strlen($input->getArgument('year'))) {
             throw InvalidInputException::forYear($input->getArgument('year'));
         }
 
         $payDays = $this->payDayGenerator->generateSalesPayDayReport($input->getArgument('year'));
 
-        $io->success(sprintf('Generated the Sales Payday for year %s in a csv', $input->getArgument('year')));
+        $io->success(sprintf(
+                'Generated the Sales Payday for year %s in a csv, Under /var directory',
+                $input->getArgument('year')
+            )
+        );
 
-        //Output the same in terminal
-        $payDayRecords = [];
-        for ($i = 1; $i <= DateUtilInterface::NO_OF_MONTHS; $i++) {
-            array_push($payDayRecords, $payDays[$i]);
-        }
-        $io->table($payDays[0], $payDayRecords);
+        //Output the same in cli table
+        $tableRow = $payDays[0];
+        unset($payDays[0]);
+        $io->table($tableRow, $payDays);
 
         return 0;
     }
