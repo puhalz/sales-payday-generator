@@ -1,6 +1,6 @@
-# Sales Payroll Pay Day Generator
+# Sales Payroll - Pay Day Generator
 
-## Running the csv generate command
+## Running the, csv generate command
 
 ```bin/console app:sales:payday <YEAR>```
 
