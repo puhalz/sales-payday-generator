@@ -32,8 +32,8 @@ class PayDayGenerator implements DateUtilInterface
 
         for ($i = 1; $i <= self::NO_OF_MONTHS; $i++) {
             $month = self::MONTHS[$i];
-            $salaryDay = $this->salaryDayCalculator->getSalaryDayOfMonth($year, $i);
-            $bonusDay = $this->bonusDayCalculator->getBonusDayOfMonth($year, $i);
+            $salaryDay = $this->salaryDayCalculator->getSalaryDayByYearMonth($year, $i);
+            $bonusDay = $this->bonusDayCalculator->getBonusDayByYearMonth($year, $i);
 
             $SalesPayDays[] = [$month, $salaryDay, $bonusDay];
         }

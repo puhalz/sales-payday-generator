@@ -23,7 +23,6 @@ COPY ./src ./src
 
 RUN php bin/console cache:warmup --env=prod --no-debug
 
-# Fix permissions for OpenShift.
 RUN chgrp -R 0 /var/www && \
   chmod -R g+rX /var/www
 

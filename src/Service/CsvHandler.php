@@ -18,13 +18,15 @@ class CsvHandler implements PayDayFileWriterInterface
     public function writeToFile($year, $paydayReport): void
     {
         try {
-            $fp = fopen(sprintf('%s/SalesPayday_%d_%d.csv', dirname(__DIR__) . self::OUTPUT_DIR, $year, time()), 'w');
+            $csvFile = fopen(
+                sprintf('%s/SalesPayday_%d_%d.csv', dirname(__DIR__) . self::OUTPUT_DIR, $year, time()
+                ), 'w');
 
             foreach ($paydayReport as $fields) {
-                fputcsv($fp, $fields);
+                fputcsv($csvFile, $fields);
             }
 
-            fclose($fp);
+            fclose($csvFile);
         } catch (\Exception $exception) {
             $this->logger->error(
                 'Unable to write the Sales pay Days to a csv file' . $exception->getMessage(),

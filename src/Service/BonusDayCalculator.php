@@ -8,7 +8,7 @@ use App\Util\DateUtilInterface;
 
 class BonusDayCalculator implements DateUtilInterface
 {
-    public function getBonusDayOfMonth($year, $month): string
+    public function getBonusDayByYearMonth($year, $month): string
     {
         $date = new \DateTimeImmutable(sprintf('%s-%s-%s', $year, $month, self::NORMAL_BONUS_DAY));
         $dateString = strtotime($date->format(self::DATE_FORMAT));

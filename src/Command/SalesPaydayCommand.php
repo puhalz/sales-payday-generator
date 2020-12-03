@@ -16,7 +16,6 @@ class SalesPaydayCommand extends Command
 
     protected static $defaultName = 'app:sales:payday';
 
-
     public function __construct(PayDayGenerator $payDayGenerator)
     {
         $this->payDayGenerator = $payDayGenerator;
@@ -51,7 +50,7 @@ class SalesPaydayCommand extends Command
         unset($payDays[0]);
         $io->table($tableRow, $payDays);
 
-        return 0;
+        return 1;
     }
 }
 

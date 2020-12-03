@@ -8,7 +8,7 @@ use App\Util\DateUtilInterface;
 
 class SalaryDayCalculator implements DateUtilInterface
 {
-    public function getSalaryDayOfMonth($year, $month): string
+    public function getSalaryDayByYearMonth($year, $month): string
     {
         $date = new \DateTimeImmutable(sprintf('%s-%s-01', $year, $month));
 
