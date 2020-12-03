@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  sales-app:
+    image: webdevops/php-nginx-dev:7.4
+    volumes:
+      - .:/var/www:delegated
+      - ./vendor:/var/www/vendor:cached
+    working_dir: /var/www
+    environment:
+      APP_ENV: dev
+    ports:
+      - 8080

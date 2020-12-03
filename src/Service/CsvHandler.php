@@ -33,7 +33,6 @@ class CsvHandler implements PayDayFileWriterInterface
 
             throw new \RuntimeException('Unable to write to a csv file.' . $exception->getMessage());
         }
-
     }
 }
 
