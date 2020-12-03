@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Collection\PayDayCollection;
 use Psr\Log\LoggerInterface;
 
 class CsvHandler implements PayDayFileWriterInterface
@@ -15,15 +16,15 @@ class CsvHandler implements PayDayFileWriterInterface
         $this->logger = $logger;
     }
 
-    public function writeToFile($year, $paydayReport): void
+    public function writeToFile(string $year, PayDayCollection $paydayRecords): void
     {
         try {
             $csvFile = fopen(
                 sprintf('%s/SalesPayday_%d_%d.csv', dirname(__DIR__) . self::OUTPUT_DIR, $year, time()
                 ), 'w');
 
-            foreach ($paydayReport as $fields) {
-                fputcsv($csvFile, $fields);
+            foreach ($paydayRecords->toArray() as $payday) {
+                fputcsv($csvFile, $payday->toArray());
             }
 
             fclose($csvFile);

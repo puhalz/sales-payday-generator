@@ -46,9 +46,15 @@ class SalesPaydayCommand extends Command
         );
 
         //Output the same in cli table
-        $tableRow = $payDays[0];
-        unset($payDays[0]);
-        $io->table($tableRow, $payDays);
+        $tableRow = $payDays->getIterator()->current();
+
+        $payDayRow = [];
+        foreach ($payDays->toArray() as $payday) {
+            $payDayRow[] = $payday->toArray();
+        }
+        unset($payDayRow[0]);
+
+        $io->table($tableRow->toArray(), $payDayRow);
 
         return 1;
     }

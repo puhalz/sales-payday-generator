@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Collection\PayDayCollection;
+use App\Model\PayDayRecord;
 use App\Util\DateUtilInterface;
 
 class PayDayGenerator implements DateUtilInterface
@@ -26,20 +28,25 @@ class PayDayGenerator implements DateUtilInterface
 
     }
 
-    public function generateSalesPayDayReport($year): array
+    public function generateSalesPayDayReport($year): PayDayCollection
     {
-        $SalesPayDays [] = self::FILE_HEADER;
+        $payDays = new PayDayCollection();
+
+        $payDayHeader = new PayDayRecord(self::FILE_HEADER[0], self::FILE_HEADER[1], self::FILE_HEADER[2]);
+        $payDays->add($payDayHeader);
 
         for ($i = 1; $i <= self::NO_OF_MONTHS; $i++) {
-            $month = self::MONTHS[$i];
-            $salaryDay = $this->salaryDayCalculator->getSalaryDayByYearMonth($year, $i);
-            $bonusDay = $this->bonusDayCalculator->getBonusDayByYearMonth($year, $i);
+            $payDayRecord = new PayDayRecord(
+                self::MONTHS[$i],
+                $this->salaryDayCalculator->getSalaryDayByYearMonth($year, $i),
+                $this->bonusDayCalculator->getBonusDayByYearMonth($year, $i)
+            );
 
-            $SalesPayDays[] = [$month, $salaryDay, $bonusDay];
+            $payDays->add($payDayRecord);
         }
 
-        $this->payDayFileWriter->writeToFile($year, $SalesPayDays);
+        $this->payDayFileWriter->writeToFile($year, $payDays);
 
-        return $SalesPayDays;
+        return $payDays;
     }
 }
