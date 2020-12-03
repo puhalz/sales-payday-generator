@@ -15,7 +15,7 @@ A csv file will be generated in the var/ folder
 
 ```bin/phpspec run```
 
-##Running with docker
+## Running with docker
 
 ``docker-compose up -d``
 
