@@ -15,8 +15,10 @@ A csv file will be generated in the var/ folder
 
 ```bin/phpspec run```
 
-##Running with docker
+## Running with docker
 
 ``docker-compose up -d``
+
+``docker exec -it sales-payday-generator_sales-app_1 composer i``
 
 ``docker exec -it sales-payday-generator_sales-app_1 bin/console app:sales:payday 2020``
