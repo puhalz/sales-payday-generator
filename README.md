@@ -23,8 +23,5 @@ A csv file will be generated in the var/ folder
 
 ``docker exec -it sales-payday-generator_sales-app_1 bin/console app:sales:payday 2020``
 
-Added a line
-Added a 2nd line
-
-2nd Test
-2nd Test 2nd commit
+Test it 1
+Test it 2
